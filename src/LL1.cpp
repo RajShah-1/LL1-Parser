@@ -30,7 +30,12 @@ LL1::LL1() {
   // build a parsing table
   // if the grammar is not LL(1), an exception is thrown by
   // buildParsingTable method
-  this->buildParsingTable();
+  try {
+    this->buildParsingTable();
+  } catch (string message) {
+    cout << "Error: " << message << "\n";
+    exit(EXIT_FAILURE);
+  }
 }
 
 bool LL1::predictiveParsing(const vector<string>& tokens) const {
@@ -507,8 +512,14 @@ void LL1::readCFG() {
     cin >> sym;
     vector<Symbol*> rhs;
     while (sym != "]") {
-      assert(this->symToPtr.find(sym) != this->symToPtr.end());
-      rhs.push_back(this->symToPtr[sym]);
+      if (sym == PRODUCTION_RULE_OR) {
+        this->productionRules[this->symToPtr[lhsStr]].insert(
+            new ProductionRule(lhs, rhs));
+        rhs.clear();
+      } else {
+        assert(this->symToPtr.find(sym) != this->symToPtr.end());
+        rhs.push_back(this->symToPtr[sym]);
+      }
       cin >> sym;
     }
 

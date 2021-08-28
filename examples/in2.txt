@@ -1,0 +1,16 @@
+4
+S A B C
+5
+a b d g h
+9
+S -> [ A C B ] 
+S -> [ C b B ]
+S -> [ B a ] 
+A -> [ d a ]
+A -> [ B C ]
+B -> [ g ]
+B -> [ ε ]
+C -> [ h ]
+C -> [ ε ]
+S
+abc

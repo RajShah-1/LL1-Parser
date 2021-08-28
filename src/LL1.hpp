@@ -14,6 +14,7 @@ using namespace std;
 const string EPSILON_SYMBOL = "ε";
 const string DOLLAR_SYMBOL = "$";
 const string NOT_LL1_EXCEPTION = "The CFG is not an LL(1) grammar";
+const string PRODUCTION_RULE_OR = "|";
 
 struct Symbol {
   int id;
@@ -69,6 +70,9 @@ class LL1 {
   //          ]
   //        )
   unordered_map<Symbol*, unordered_map<Symbol*, ProductionRule*>> parsingTable;
+
+  // Relative path of grammar's folder from current directory
+  const string dirPath;
 
   void computeFirstForSym(Symbol* sym);
   void printProductionRule(const ProductionRule* pr);

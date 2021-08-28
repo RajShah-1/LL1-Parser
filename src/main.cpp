@@ -4,7 +4,7 @@
 int main() {
   LL1 cfg;
   vector<string> tokens;
-  
+  cout << "Test-input:\n";
   cin.ignore(1000, '\n');
   int token = yylex();
   while (token) {
