@@ -1,7 +1,5 @@
 #include "LL1.hpp"
 
-#include <cassert>
-
 LL1::LL1() {
   this->totNumSyms = 0;
   // take cfg as an input from the user
@@ -10,6 +8,15 @@ LL1::LL1() {
   cout << "\n You entered:\n";
   this->printCFG();
 
+  // Nested left recursion is removed, but nested left factors are not
+  // seperated. So, if a grammar has nested left factoring, it will not be
+  // successfully converted to an LL1 grammar.
+  // Example of such grammar
+  //    A -> B | abcd
+  //    B -> abd
+  //    (In this grammar, effectively A -> abd | abcd, this production-rule has
+  //    a common factor "ab")
+  // In this case, calling buildParseTable method might cause an exception
   this->eliminateLeftRecursion();
   this->leftFactor();
 
@@ -21,9 +28,120 @@ LL1::LL1() {
   this->computeFollow();
 
   // build a parsing table
+  // if the grammar is not LL(1), an exception is thrown by
+  // buildParsingTable method
+  this->buildParsingTable();
+}
 
-  // if the grammar is not LL(1), print an error and exit
+bool LL1::predictiveParsing(const vector<string>& tokens) const {
+  int tokenIndex = 0;
+  stack<Symbol*> st;
+  st.push(this->dollarSymbol);
+  st.push(this->startSymbol);
 
+  while (!st.empty()) {
+    Symbol* stackTop = st.top();
+    if (this->symToPtr.find(tokens[tokenIndex]) == this->symToPtr.end()) {
+      cout << "Unexpected symbol: " << tokens[tokenIndex] << "\n";
+      return false;
+    }
+    Symbol* tokenPtr = this->symToPtr.find(tokens[tokenIndex])->second;
+    if (!tokenPtr->isTerminal || tokenPtr == this->dollarSymbol ||
+        tokenPtr == this->epsSymbol) {
+      cout << "Unexpected symbol: " << tokens[tokenIndex] << "\n";
+      return false;
+    }
+
+    if (stackTop->isTerminal && stackTop->symbol == tokens[tokenIndex]) {
+      st.pop();
+      tokenIndex++;
+      if (tokenIndex == tokens.size()) {
+        return (st.size() == 1 && st.top() == this->dollarSymbol);
+      }
+    } else if (stackTop->isTerminal) {
+      cout << "Expected: " << stackTop->symbol
+           << " Found: " << tokens[tokenIndex] << "\n";
+      return false;
+    } else {
+      if (this->parsingTable.find(stackTop) == this->parsingTable.end()) {
+        cout << "No production rules for the non-terminal: " << stackTop->symbol
+             << "\n";
+        return false;
+      }
+      auto symParseRow = this->parsingTable.find(stackTop)->second;
+      if (symParseRow.find(tokenPtr) == symParseRow.end()) {
+        cout << "No production rules for the combination of non-terminal: "
+             << stackTop->symbol << " and input-symbol: " << tokenPtr->symbol
+             << "\n";
+        return false;
+      }
+      ProductionRule* pr = symParseRow.find(tokenPtr)->second;
+      st.pop();
+      for (auto it = pr->rhs.rbegin(); it != pr->rhs.rend(); ++it) {
+        st.push(*it);
+      }
+    }
+  }
+
+  return false;
+}
+
+void LL1::buildParsingTable() {
+  auto& ll1ParsingTable = this->parsingTable;
+  this->parsingTable.clear();
+  for (const auto& symPr : this->productionRules) {
+    for (ProductionRule* pr : symPr.second) {
+      bool isEps = false;
+      Symbol* activeSymbol = pr->lhs;
+      for (Symbol* rhsSym : pr->rhs) {
+        // iterate first(rhsSym)
+        for (Symbol* firstRhsSym : this->firstSetsMap[rhsSym]) {
+          if (firstRhsSym == this->epsSymbol) {
+            isEps = true;
+            continue;
+          }
+          // if there is already a rule in
+          // ParsingTable[activeSymbol][firstRhsSym] -> throw an exception
+          if (ll1ParsingTable.find(activeSymbol) != ll1ParsingTable.end() &&
+              ll1ParsingTable[activeSymbol].find(firstRhsSym) !=
+                  ll1ParsingTable[activeSymbol].end()) {
+            throw NOT_LL1_EXCEPTION;
+          }
+          parsingTable[activeSymbol][firstRhsSym] = pr;
+        }
+        if (!isEps) break;
+      }
+      // if first(rhs) has eps
+      if (isEps) {
+        // add prodution-rule for all the input symbols in Follow(pr->lhs)
+        for (Symbol* followSym : this->followSetsMap[activeSymbol]) {
+          // if there is already a rule in
+          // ParsingTable[activeSymbol][followSym] -> throw an exception
+          if (ll1ParsingTable.find(activeSymbol) != ll1ParsingTable.end() &&
+              ll1ParsingTable[activeSymbol].find(followSym) !=
+                  ll1ParsingTable[activeSymbol].end()) {
+            throw NOT_LL1_EXCEPTION;
+          }
+          parsingTable[activeSymbol][followSym] = pr;
+        }
+      }
+    }
+  }
+
+  // print parsing table
+  cout << "Parsing Table\n";
+  for (const auto& nonTerEntry : this->parsingTable) {
+    for (const auto& ipSymEntry : nonTerEntry.second) {
+      // ipSymEntry.second
+      cout << "( " << nonTerEntry.first->symbol << ", "
+           << ipSymEntry.first->symbol << ") -> ";
+      cout << ipSymEntry.second->lhs->symbol << " -> [ ";
+      for (Symbol* rhsSym : ipSymEntry.second->rhs) {
+        cout << rhsSym->symbol << " ";
+      }
+      cout << "]\n";
+    }
+  }
 }
 
 void LL1::computeFirstForSym(Symbol* sym) {
@@ -305,8 +423,8 @@ void LL1::leftFactor() {
 }
 
 void LL1::readCFG() {
+  this->symToPtr.clear();
   unordered_map<string, int> symToId;
-  unordered_map<string, Symbol*> symToPtr;
   string sym;
 
   cout << "Note: terminal symbols and non-terminal symbols can be strings. "
@@ -315,17 +433,19 @@ void LL1::readCFG() {
        << EPSILON_SYMBOL << "\" as epsilon \n\n";
 
   // add epsilon to grammar
-  symToPtr[EPSILON_SYMBOL] = new Symbol(this->totNumSyms, EPSILON_SYMBOL, true);
+  this->symToPtr[EPSILON_SYMBOL] =
+      new Symbol(this->totNumSyms, EPSILON_SYMBOL, true);
   symToId[EPSILON_SYMBOL] = this->totNumSyms;
-  this->epsSymbol = symToPtr[EPSILON_SYMBOL];
-  // this->terminals.push_back(symToPtr[EPSILON_SYMBOL]);
+  this->epsSymbol = this->symToPtr[EPSILON_SYMBOL];
+  // this->terminals.push_back(this->symToPtr[EPSILON_SYMBOL]);
   this->totNumSyms++;
 
   //  add $ symbol to grammar
-  symToPtr[DOLLAR_SYMBOL] = new Symbol(this->totNumSyms, DOLLAR_SYMBOL, true);
+  this->symToPtr[DOLLAR_SYMBOL] =
+      new Symbol(this->totNumSyms, DOLLAR_SYMBOL, true);
   symToId[DOLLAR_SYMBOL] = this->totNumSyms;
-  this->dollarSymbol = symToPtr[DOLLAR_SYMBOL];
-  // this->terminals.push_back(symToPtr[DOLLAR_SYMBOL]);
+  this->dollarSymbol = this->symToPtr[DOLLAR_SYMBOL];
+  // this->terminals.push_back(this->symToPtr[DOLLAR_SYMBOL]);
   this->totNumSyms++;
 
   int numNonTers, numTers, numProdRules;
@@ -334,9 +454,9 @@ void LL1::readCFG() {
   cout << "Enter " << numNonTers << " non-terminals:\n";
   for (int i = 0; i < numNonTers; ++i) {
     cin >> sym;
-    symToPtr[sym] = new Symbol(this->totNumSyms, sym, false);
+    this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, false);
     symToId[sym] = this->totNumSyms;
-    this->nonTerminals.push_back(symToPtr[sym]);
+    this->nonTerminals.push_back(this->symToPtr[sym]);
     ++this->totNumSyms;
   }
 
@@ -345,9 +465,9 @@ void LL1::readCFG() {
   cout << "Enter " << numTers << " terminals:\n";
   for (int i = 0; i < numTers; ++i) {
     cin >> sym;
-    symToPtr[sym] = new Symbol(this->totNumSyms, sym, true);
+    this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, true);
     symToId[sym] = this->totNumSyms;
-    this->terminals.push_back(symToPtr[sym]);
+    this->terminals.push_back(this->symToPtr[sym]);
     ++this->totNumSyms;
   }
 
@@ -368,9 +488,9 @@ void LL1::readCFG() {
     // parsing the production rules
 
     cin >> sym;
-    assert(symToPtr.find(sym) != symToPtr.end());
-    assert(!symToPtr[sym]->isTerminal);
-    Symbol* lhs = symToPtr[sym];
+    assert(this->symToPtr.find(sym) != this->symToPtr.end());
+    assert(!this->symToPtr[sym]->isTerminal);
+    Symbol* lhs = this->symToPtr[sym];
     lhsStr = sym;
 
     cin >> tmpStr;
@@ -381,20 +501,20 @@ void LL1::readCFG() {
     cin >> sym;
     vector<Symbol*> rhs;
     while (sym != "]") {
-      assert(symToPtr.find(sym) != symToPtr.end());
-      rhs.push_back(symToPtr[sym]);
+      assert(this->symToPtr.find(sym) != this->symToPtr.end());
+      rhs.push_back(this->symToPtr[sym]);
       cin >> sym;
     }
 
-    this->productionRules[symToPtr[lhsStr]].insert(
+    this->productionRules[this->symToPtr[lhsStr]].insert(
         new ProductionRule(lhs, rhs));
   }
 
   cout << "Enter start symbol: ";
   cin >> sym;
-  assert(symToPtr.find(sym) != symToPtr.end());
-  assert(!symToPtr[sym]->isTerminal);
-  this->startSymbol = symToPtr[sym];
+  assert(this->symToPtr.find(sym) != this->symToPtr.end());
+  assert(!this->symToPtr[sym]->isTerminal);
+  this->startSymbol = this->symToPtr[sym];
 }
 
 void LL1::printCFG() {

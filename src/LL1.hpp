@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <stack>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -41,6 +42,9 @@ class LL1 {
   Symbol* dollarSymbol;
   vector<Symbol*> terminals;
   vector<Symbol*> nonTerminals;
+  
+  // map symbol-strings to corresponding symbol-pointer
+  unordered_map<string, Symbol*> symToPtr;
   // map (symbol-ptr) to (production rules with that symbol on lhs)
   unordered_map<Symbol*, unordered_set<ProductionRule*>> productionRules;
 
@@ -48,14 +52,18 @@ class LL1 {
   unordered_map<Symbol*, unordered_set<Symbol*>> firstSetsMap;
   unordered_map<Symbol*, unordered_set<Symbol*>> followSetsMap;
 
-  // Parsing table
-  // map(current-symbol ->
-  //  (
-  //    map (current input symbol ->
-  //          [map (input character) ->
-  //                (production rule to be used for the pair
-  //                {current-input-symbol, input-character})]
-  // )
+  // Parsing table:
+  //
+  //    map (current non-terminal ->
+  //          [
+  //              map (current input symbol ->
+  //                [
+  //                    production rule to be used for the pair
+  //                    {current non-terminal, current-input-symbol}
+  //                ]
+  //              )
+  //          ]
+  //        )
   unordered_map<Symbol*, unordered_map<Symbol*, ProductionRule*>> parsingTable;
 
   void computeFirstForSym(Symbol* sym);
@@ -68,7 +76,7 @@ class LL1 {
   void computeFollow();
   bool isLL1();
   void buildParsingTable();
-  void predictiveParsing(const string& str);
+  bool predictiveParsing(const vector<string>& tokens) const;
   void readCFG();
   void printCFG();
 };
