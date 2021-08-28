@@ -40,14 +40,15 @@ bool LL1::predictiveParsing(const vector<string>& tokens) const {
   st.push(this->startSymbol);
 
   while (!st.empty()) {
+    cout << "Lookup: [" << st.top()->symbol << " " << tokens[tokenIndex]
+         << "]\n";
     Symbol* stackTop = st.top();
     if (this->symToPtr.find(tokens[tokenIndex]) == this->symToPtr.end()) {
       cout << "Unexpected symbol: " << tokens[tokenIndex] << "\n";
       return false;
     }
     Symbol* tokenPtr = this->symToPtr.find(tokens[tokenIndex])->second;
-    if (!tokenPtr->isTerminal || tokenPtr == this->dollarSymbol ||
-        tokenPtr == this->epsSymbol) {
+    if (!tokenPtr->isTerminal || tokenPtr == this->epsSymbol) {
       cout << "Unexpected symbol: " << tokens[tokenIndex] << "\n";
       return false;
     }
@@ -55,8 +56,11 @@ bool LL1::predictiveParsing(const vector<string>& tokens) const {
     if (stackTop->isTerminal && stackTop->symbol == tokens[tokenIndex]) {
       st.pop();
       tokenIndex++;
+      cout << "Match found: " << stackTop->symbol << "\nStack: " << st
+           << "\nRemaining-I/p: "
+           << make_pair(tokens, make_pair(tokenIndex, tokens.size())) << "\n";
       if (tokenIndex == tokens.size()) {
-        return (st.size() == 1 && st.top() == this->dollarSymbol);
+        return (st.size() == 0);
       }
     } else if (stackTop->isTerminal) {
       cout << "Expected: " << stackTop->symbol
@@ -64,23 +68,25 @@ bool LL1::predictiveParsing(const vector<string>& tokens) const {
       return false;
     } else {
       if (this->parsingTable.find(stackTop) == this->parsingTable.end()) {
-        cout << "No production rules for the non-terminal: " << stackTop->symbol
-             << "\n";
+        cout << "No production rule can be applied!\n";
         return false;
       }
       auto symParseRow = this->parsingTable.find(stackTop)->second;
       if (symParseRow.find(tokenPtr) == symParseRow.end()) {
-        cout << "No production rules for the combination of non-terminal: "
-             << stackTop->symbol << " and input-symbol: " << tokenPtr->symbol
-             << "\n";
+        cout << "No production rule can be applied!\n";
         return false;
       }
       ProductionRule* pr = symParseRow.find(tokenPtr)->second;
       st.pop();
       for (auto it = pr->rhs.rbegin(); it != pr->rhs.rend(); ++it) {
+        if ((*it) == this->epsSymbol) continue;
         st.push(*it);
       }
+      cout << "Applying production rule: " << pr << "\nStack: " << st
+           << "\nRemaining-I/p: "
+           << make_pair(tokens, make_pair(tokenIndex, tokens.size())) << "\n";
     }
+    cout << "===\n";
   }
 
   return false;
@@ -535,13 +541,44 @@ void LL1::printCFG() {
 
   cout << "\nProduction rules:\n";
   for (auto pr : this->productionRules) {
-    for (auto productionRule : pr.second) {
-      cout << productionRule->lhs->symbol << " -> [ ";
-      for (Symbol* rhsSym : productionRule->rhs) {
-        cout << rhsSym->symbol << " ";
-      }
-      cout << "]\n";
+    for (ProductionRule* productionRule : pr.second) {
+      cout << productionRule << "\n";
     }
   }
   cout << "===\n";
+}
+
+ostream& operator<<(ostream& os, const Symbol* sym) {
+  os << "[ " << sym->symbol << " " << sym->id << " " << sym->isTerminal
+     << " ] ";
+  return os;
+}
+
+ostream& operator<<(ostream& os, const ProductionRule* pr) {
+  os << pr->lhs->symbol << " -> [ ";
+  for (Symbol* rhsSym : pr->rhs) {
+    os << rhsSym->symbol << " ";
+  }
+  os << "] ";
+  return os;
+}
+
+ostream& operator<<(ostream& os, stack<Symbol*> st) {
+  os << "[ ";
+  while (!st.empty()) {
+    os << st.top()->symbol << " ";
+    st.pop();
+  }
+  os << "] ";
+  return os;
+}
+
+ostream& operator<<(ostream& os,
+                    const pair<vector<string>, pair<int, int>>& vec) {
+  os << "[ ";
+  for (int i = vec.second.first; i < vec.second.second; ++i) {
+    os << vec.first[i] << " ";
+  }
+  os << "] ";
+  return os;
 }
