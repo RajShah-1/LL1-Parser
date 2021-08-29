@@ -1,0 +1,16 @@
+===Parse-table-begin:
+13
+Parse[ E ( ] : E -> [ T E_' ] 
+Parse[ E id ] : E -> [ T E_' ] 
+Parse[ T id ] : T -> [ F T_' ] 
+Parse[ T ( ] : T -> [ F T_' ] 
+Parse[ F ( ] : F -> [ ( E ) ] 
+Parse[ F id ] : F -> [ id ] 
+Parse[ E_' + ] : E_' -> [ + T E_' ] 
+Parse[ E_' ) ] : E_' -> [ ε ] 
+Parse[ E_' $ ] : E_' -> [ ε ] 
+Parse[ T_' * ] : T_' -> [ * F T_' ] 
+Parse[ T_' $ ] : T_' -> [ ε ] 
+Parse[ T_' ) ] : T_' -> [ ε ] 
+Parse[ T_' + ] : T_' -> [ ε ] 
+===Parse-table-end

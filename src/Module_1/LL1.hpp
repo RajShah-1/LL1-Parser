@@ -2,6 +2,7 @@
 #define __LL1_HPP__
 
 #include <cassert>
+#include <fstream>
 #include <iostream>
 #include <stack>
 #include <string>
@@ -9,36 +10,10 @@
 #include <unordered_set>
 #include <vector>
 
+#include "../Common/constants.hpp"
+#include "../Common/structs.hpp"
+
 using namespace std;
-
-const string EPSILON_SYMBOL = "ε";
-const string DOLLAR_SYMBOL = "$";
-const string NOT_LL1_EXCEPTION = "The CFG is not an LL(1) grammar";
-const string PRODUCTION_RULE_OR = "|";
-
-struct Symbol {
-  int id;
-  string symbol;
-  bool isTerminal;
-  Symbol(int id, string symbol, bool isTerminal) {
-    this->id = id;
-    this->symbol = symbol;
-    this->isTerminal = isTerminal;
-  }
-  // Operator-overloading for serialization
-  friend ostream& operator<<(ostream& os, const Symbol* sym);
-};
-
-struct ProductionRule {
-  Symbol* lhs;
-  vector<Symbol*> rhs;
-  ProductionRule(Symbol* lhs, vector<Symbol*>& rhs) {
-    this->lhs = lhs;
-    this->rhs = rhs;
-  }
-  // Operator-overloading for serialization
-  friend ostream& operator<<(ostream& os, const ProductionRule* sym);
-};
 
 class LL1 {
   int totNumSyms;
@@ -72,10 +47,11 @@ class LL1 {
   unordered_map<Symbol*, unordered_map<Symbol*, ProductionRule*>> parsingTable;
 
   // Relative path of grammar's folder from current directory
-  const string dirPath;
+  string dirPath;
 
   void computeFirstForSym(Symbol* sym);
-  void printProductionRule(const ProductionRule* pr);
+  void printFirst(ostream& out) const;
+  void printFollow(ostream& out) const;
 
  public:
   LL1();
@@ -88,8 +64,10 @@ class LL1 {
   bool predictiveParsing(const vector<string>& tokens) const;
   void readCFG();
   void printCFG();
-
-  // Operator-overloading for serialization
+  void setDirPath(const string& dirPath);
+  void createFirstFollowFile() const;
+  void createLL1GrammarFile() const;
+  void createParseTableFile() const;
 };
 
 // Operator-overloadings for easy printing

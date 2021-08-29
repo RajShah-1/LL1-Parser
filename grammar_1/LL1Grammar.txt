@@ -1,0 +1,18 @@
+===LL1-grammar-begin:
+Terminals: 5 (  )  +  *  id  
+Non-terminals: 5 E  T  F  E_'  T_'  
+Eps-symbol: ε 
+Dollar-symbol: $ 
+Start-symbol: E 
+===Production-rules-begin:
+8
+T_' -> [ ε ] 
+T_' -> [ * F T_' ] 
+E_' -> [ ε ] 
+E_' -> [ + T E_' ] 
+F -> [ id ] 
+F -> [ ( E ) ] 
+T -> [ F T_' ] 
+E -> [ T E_' ] 
+===Production-rules-end
+===LL1-grammar-end

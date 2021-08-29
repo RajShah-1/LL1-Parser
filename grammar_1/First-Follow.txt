@@ -1,0 +1,20 @@
+===First-sets-begin:
+T_' -> [ * ε ]
+E_' -> [ + ε ]
+T -> [ id ( ]
+E -> [ ( id ]
+F -> [ ( id ]
++ -> [ + ]
+id -> [ id ]
+) -> [ ) ]
+ε -> [ ε ]
+* -> [ * ]
+( -> [ ( ]
+===First-sets-end
+===Follow-sets-begin:
+T_' -> [ + ) $ ]
+E_' -> [ $ ) ]
+T -> [ $ ) + ]
+F -> [ + ) $ * ]
+E -> [ ) $ ]
+===Follow-sets-end

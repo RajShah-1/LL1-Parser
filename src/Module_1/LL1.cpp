@@ -559,9 +559,118 @@ void LL1::printCFG() {
   cout << "===\n";
 }
 
+void LL1::printFirst(ostream& out) const {
+  // unordered_map<Symbol*, unordered_set<Symbol*>> firstSetsMap;
+  out << "===First-sets-begin:\n";
+  for (auto symRow : this->firstSetsMap) {
+    out << symRow.first->symbol << " -> [ ";
+    for (auto firstElem : symRow.second) {
+      out << firstElem->symbol << " ";
+    }
+    out << "]\n";
+  }
+  out << "===First-sets-end\n";
+}
+
+void LL1::printFollow(ostream& out) const {
+  out << "===Follow-sets-begin:\n";
+  for (auto symRow : this->followSetsMap) {
+    out << symRow.first->symbol << " -> [ ";
+    for (auto firstElem : symRow.second) {
+      out << firstElem->symbol << " ";
+    }
+    out << "]\n";
+  }
+  out << "===Follow-sets-end\n";
+}
+
+void LL1::setDirPath(const string& dirPath) { this->dirPath = dirPath; }
+
+void LL1::createFirstFollowFile() const {
+  ofstream outFile;
+  if (this->dirPath != "") {
+    outFile.open(dirPath + "/" + FIRST_FOLLOW_FILE_NAME);
+  } else {
+    outFile.open("./" + FIRST_FOLLOW_FILE_NAME);
+  }
+  this->printFirst(outFile);
+  this->printFollow(outFile);
+  outFile.close();
+}
+
+void LL1::createLL1GrammarFile() const {
+  ofstream outFile;
+  if (this->dirPath != "") {
+    outFile.open(dirPath + "/" + LL1_GRAMMAR_FILE_NAME);
+  } else {
+    outFile.open("./" + LL1_GRAMMAR_FILE_NAME);
+  }
+
+  outFile << "===LL1-grammar-begin:\n";
+  outFile << "Terminals: ";
+  outFile << this->terminals.size() << " ";
+  for (Symbol* terminal : this->terminals) {
+    outFile << terminal << " ";
+  }
+  outFile << "\n";
+
+  outFile << "Non-terminals: ";
+  outFile << this->nonTerminals.size() << " ";
+  for (Symbol* nonTerminal : this->nonTerminals) {
+    outFile << nonTerminal << " ";
+  }
+  outFile << "\n";
+
+  outFile << "Eps-symbol: " << this->epsSymbol << "\n";
+  outFile << "Dollar-symbol: " << this->dollarSymbol << "\n";
+  outFile << "Start-symbol: " << this->startSymbol << "\n";
+
+  int totalProdRules = 0;
+  for (auto pr : this->productionRules) {
+    totalProdRules += pr.second.size();
+  }
+
+  outFile << "===Production-rules-begin:\n";
+  outFile << totalProdRules << "\n";
+  for (auto pr : this->productionRules) {
+    for (ProductionRule* productionRule : pr.second) {
+      outFile << productionRule << "\n";
+    }
+  }
+  outFile << "===Production-rules-end\n";
+  outFile << "===LL1-grammar-end\n";
+  outFile.close();
+}
+
+void LL1::createParseTableFile() const {
+  ofstream outFile;
+  if (this->dirPath != "") {
+    outFile.open(dirPath + "/" + PARSE_TABLE_FILE_NAME);
+  } else {
+    outFile.open("./" + PARSE_TABLE_FILE_NAME);
+  }
+  int numEntries = 0;
+  for (auto nonTerRow : this->parsingTable) {
+    numEntries += nonTerRow.second.size();
+  }
+
+  outFile << "===Parse-table-begin:\n";
+  outFile << numEntries << "\n";
+  for (auto nonTerRow : this->parsingTable) {
+    for (auto ipSymCell : nonTerRow.second) {
+      outFile << "Parse[ " << nonTerRow.first->symbol << " "
+              << ipSymCell.first->symbol << " ] : ";
+      outFile << ipSymCell.second << "\n";
+    }
+  }
+  outFile << "===Parse-table-end\n";
+  outFile.close();
+}
+
 ostream& operator<<(ostream& os, const Symbol* sym) {
-  os << "[ " << sym->symbol << " " << sym->id << " " << sym->isTerminal
-     << " ] ";
+  os << sym->symbol << " ";
+  // os << "[ " << sym->symbol << " " << sym->id << " " << sym->isTerminal
+  //    << " ] ";
   return os;
 }
 
