@@ -1,17 +1,19 @@
 ===LL1-grammar-begin:
-Terminals: 32 +  −  ∗  /  =  <  >  (  )  {  }  :=  ;  and  else  end  ic  id  if  int  do  fc  float  not  or  \  print  prog  scan  str  then  while  
+Terminals: 32 +  -  ∗  /  =  <  >  (  )  {  }  :=  ;  and  else  end  ic  id  if  int  do  fc  float  not  or  \  print  prog  scan  str  then  while  
 Non-terminals: 28 AE  BE  D  DL  E  F  ES  IOS  IS  NE  P  PE  RE  S  SL  T  TY  VL  WS  AE_'  BE_'  E_'  T_'  NT_57  NT_58  NT_59  NT_60  NT_61  
 Eps-symbol: ε 
 Dollar-symbol: $ 
 Start-symbol: P 
 ===Production-rules-begin:
-59
+61
 NT_59 -> [ end ] 
 NT_59 -> [ else SL end ] 
-NT_58 -> [ ε ] 
+NT_58 -> [ = E ] 
+NT_58 -> [ < E ] 
+NT_58 -> [ > E ] 
 E_' -> [ ε ] 
 E_' -> [ + T E_' ] 
-E_' -> [ − T E_' ] 
+E_' -> [ - T E_' ] 
 BE_' -> [ ε ] 
 BE_' -> [ or AE BE_' ] 
 AE_' -> [ ε ] 
@@ -28,14 +30,14 @@ SL -> [ id := E ; SL ]
 SL -> [ scan id SL ] 
 SL -> [ print PE SL ] 
 SL -> [ ε ] 
-SL -> [ if BE then SL end SL NT_60 ] 
+SL -> [ if BE then SL NT_60 ] 
 SL -> [ WS SL ] 
 WS -> [ while BE do SL end ] 
 NT_61 -> [ ε ] 
 NT_61 -> [ VL ] 
+NT_60 -> [ else SL end SL ] 
 NT_60 -> [ end SL ] 
-NT_60 -> [ ε ] 
-RE -> [ T E_' > E NT_58 ] 
+RE -> [ T E_' NT_58 ] 
 IS -> [ if BE then SL NT_57 ] 
 T -> [ id T_' ] 
 T -> [ ic T_' ] 

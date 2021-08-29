@@ -1,0 +1,214 @@
+Test-input:
+Token: id
+Token: +
+Token: id
+Token: *
+Token: (
+Token: id
+Token: +
+Token: id
+Token: )
+Token: *
+Token: id
+Token: +
+Token: id
+Lookup: [E id]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' $ ] 
+Remaining-I/p: [ id + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ F T_' ] 
+Stack: [ F T_' E_' $ ] 
+Remaining-I/p: [ id + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' $ ] 
+Remaining-I/p: [ id + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' $ ] 
+Remaining-I/p: [ + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [T_' +]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' $ ] 
+Remaining-I/p: [ + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [E_' +]
+Applying production rule: E_' -> [ + T E_' ] 
+Stack: [ + T E_' $ ] 
+Remaining-I/p: [ + id * ( id + id ) * id + id $ ] 
+===
+Lookup: [+ +]
+Match found: +
+Stack: [ T E_' $ ] 
+Remaining-I/p: [ id * ( id + id ) * id + id $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ F T_' ] 
+Stack: [ F T_' E_' $ ] 
+Remaining-I/p: [ id * ( id + id ) * id + id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' $ ] 
+Remaining-I/p: [ id * ( id + id ) * id + id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' $ ] 
+Remaining-I/p: [ * ( id + id ) * id + id $ ] 
+===
+Lookup: [T_' *]
+Applying production rule: T_' -> [ * F T_' ] 
+Stack: [ * F T_' E_' $ ] 
+Remaining-I/p: [ * ( id + id ) * id + id $ ] 
+===
+Lookup: [* *]
+Match found: *
+Stack: [ F T_' E_' $ ] 
+Remaining-I/p: [ ( id + id ) * id + id $ ] 
+===
+Lookup: [F (]
+Applying production rule: F -> [ ( E ) ] 
+Stack: [ ( E ) T_' E_' $ ] 
+Remaining-I/p: [ ( id + id ) * id + id $ ] 
+===
+Lookup: [( (]
+Match found: (
+Stack: [ E ) T_' E_' $ ] 
+Remaining-I/p: [ id + id ) * id + id $ ] 
+===
+Lookup: [E id]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id + id ) * id + id $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ F T_' ] 
+Stack: [ F T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id + id ) * id + id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id + id ) * id + id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ + id ) * id + id $ ] 
+===
+Lookup: [T_' +]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ) T_' E_' $ ] 
+Remaining-I/p: [ + id ) * id + id $ ] 
+===
+Lookup: [E_' +]
+Applying production rule: E_' -> [ + T E_' ] 
+Stack: [ + T E_' ) T_' E_' $ ] 
+Remaining-I/p: [ + id ) * id + id $ ] 
+===
+Lookup: [+ +]
+Match found: +
+Stack: [ T E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id ) * id + id $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ F T_' ] 
+Stack: [ F T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id ) * id + id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ id ) * id + id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' ) T_' E_' $ ] 
+Remaining-I/p: [ ) * id + id $ ] 
+===
+Lookup: [T_' )]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ) T_' E_' $ ] 
+Remaining-I/p: [ ) * id + id $ ] 
+===
+Lookup: [E_' )]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ) T_' E_' $ ] 
+Remaining-I/p: [ ) * id + id $ ] 
+===
+Lookup: [) )]
+Match found: )
+Stack: [ T_' E_' $ ] 
+Remaining-I/p: [ * id + id $ ] 
+===
+Lookup: [T_' *]
+Applying production rule: T_' -> [ * F T_' ] 
+Stack: [ * F T_' E_' $ ] 
+Remaining-I/p: [ * id + id $ ] 
+===
+Lookup: [* *]
+Match found: *
+Stack: [ F T_' E_' $ ] 
+Remaining-I/p: [ id + id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' $ ] 
+Remaining-I/p: [ id + id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' $ ] 
+Remaining-I/p: [ + id $ ] 
+===
+Lookup: [T_' +]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' $ ] 
+Remaining-I/p: [ + id $ ] 
+===
+Lookup: [E_' +]
+Applying production rule: E_' -> [ + T E_' ] 
+Stack: [ + T E_' $ ] 
+Remaining-I/p: [ + id $ ] 
+===
+Lookup: [+ +]
+Match found: +
+Stack: [ T E_' $ ] 
+Remaining-I/p: [ id $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ F T_' ] 
+Stack: [ F T_' E_' $ ] 
+Remaining-I/p: [ id $ ] 
+===
+Lookup: [F id]
+Applying production rule: F -> [ id ] 
+Stack: [ id T_' E_' $ ] 
+Remaining-I/p: [ id $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' $ ] 
+Remaining-I/p: [ $ ] 
+===
+Lookup: [T_' $]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' $ ] 
+Remaining-I/p: [ $ ] 
+===
+Lookup: [E_' $]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ $ ] 
+Remaining-I/p: [ $ ] 
+===
+Lookup: [$ $]
+Match found: $
+Stack: [ ] 
+Remaining-I/p: [ ] 
+Verdict: Accepted

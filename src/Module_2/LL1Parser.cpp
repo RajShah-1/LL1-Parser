@@ -10,18 +10,12 @@ LL1Parser::LL1Parser(const string& path) {
   this->readLL1File(inFileLL1);
   inFileLL1.close();
 
-  // fills up: startSymbol, terminals, nonTerminals, and production-rules
-  cout << "\n You entered:\n";
-  this->printCFG();
-
   // read parsing table from the file
 
   ifstream inFileParseTable;
   inFileParseTable.open(this->dirPath + "/" + PARSE_TABLE_FILE_NAME);
   this->readParseTableFile(inFileParseTable);
   inFileParseTable.close();
-
-  this->printParseTable();
 }
 
 bool LL1Parser::predictiveParsing(const vector<string>& tokens) const {

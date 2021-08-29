@@ -1,0 +1,1276 @@
+Test-input:
+Token: prog
+Token: int
+Token: id
+Token: ;
+Token: int
+Token: id
+Token: ;
+Token: int
+Token: id
+Token: ;
+Token: int
+Token: id
+Token: ;
+Token: id
+Token: :=
+Token: ic
+Token: ;
+Token: id
+Token: :=
+Token: ic
+Token: ;
+Token: scan
+Token: id
+Token: print
+Token: id
+Token: if
+Token: id
+Token: =
+Token: ic
+Token: then
+Token: id
+Token: :=
+Token: ic
+Token: ;
+Token: else
+Token: if
+Token: id
+Token: <
+Token: ic
+Token: then
+Token: id
+Token: :=
+Token: fc
+Token: ;
+Token: end
+Token: while
+Token: id
+Token: >
+Token: fc
+Token: do
+Token: id
+Token: :=
+Token: id
+Token: -
+Token: ic
+Token: ;
+Token: end
+Token: end
+Token: while
+Token: id
+Token: >
+Token: ic
+Token: do
+Token: id
+Token: :=
+Token: id
+Token: +
+Token: ic
+Token: ;
+Token: id
+Token: :=
+Token: fc
+Token: ;
+Token: if
+Token: id
+Token: =
+Token: ic
+Token: then
+Token: id
+Token: :=
+Token: ic
+Token: ;
+Token: end
+Token: end
+Token: end
+Lookup: [P prog]
+Applying production rule: P -> [ prog DL SL end ] 
+Stack: [ prog DL SL end $ ] 
+Remaining-I/p: [ prog int id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [prog prog]
+Match found: prog
+Stack: [ DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [DL int]
+Applying production rule: DL -> [ TY VL ; DL ] 
+Stack: [ TY VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [TY int]
+Applying production rule: TY -> [ int ] 
+Stack: [ int VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [int int]
+Match found: int
+Stack: [ VL ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [VL id]
+Applying production rule: VL -> [ id NT_61 ] 
+Stack: [ id NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_61 ;]
+Applying production rule: NT_61 -> [ ε ] 
+Stack: [ ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [DL int]
+Applying production rule: DL -> [ TY VL ; DL ] 
+Stack: [ TY VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [TY int]
+Applying production rule: TY -> [ int ] 
+Stack: [ int VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [int int]
+Match found: int
+Stack: [ VL ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [VL id]
+Applying production rule: VL -> [ id NT_61 ] 
+Stack: [ id NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_61 ;]
+Applying production rule: NT_61 -> [ ε ] 
+Stack: [ ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [DL int]
+Applying production rule: DL -> [ TY VL ; DL ] 
+Stack: [ TY VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [TY int]
+Applying production rule: TY -> [ int ] 
+Stack: [ int VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [int int]
+Match found: int
+Stack: [ VL ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [VL id]
+Applying production rule: VL -> [ id NT_61 ] 
+Stack: [ id NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ id ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_61 ;]
+Applying production rule: NT_61 -> [ ε ] 
+Stack: [ ; DL SL end $ ] 
+Remaining-I/p: [ ; int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ DL SL end $ ] 
+Remaining-I/p: [ int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [DL int]
+Applying production rule: DL -> [ TY VL ; DL ] 
+Stack: [ TY VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [TY int]
+Applying production rule: TY -> [ int ] 
+Stack: [ int VL ; DL SL end $ ] 
+Remaining-I/p: [ int id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [int int]
+Match found: int
+Stack: [ VL ; DL SL end $ ] 
+Remaining-I/p: [ id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [VL id]
+Applying production rule: VL -> [ id NT_61 ] 
+Stack: [ id NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ id ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ NT_61 ; DL SL end $ ] 
+Remaining-I/p: [ ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_61 ;]
+Applying production rule: NT_61 -> [ ε ] 
+Stack: [ ; DL SL end $ ] 
+Remaining-I/p: [ ; id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ DL SL end $ ] 
+Remaining-I/p: [ id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [DL id]
+Applying production rule: DL -> [ ε ] 
+Stack: [ SL end $ ] 
+Remaining-I/p: [ id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL end $ ] 
+Remaining-I/p: [ id := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL end $ ] 
+Remaining-I/p: [ := ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL end $ ] 
+Remaining-I/p: [ ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL end $ ] 
+Remaining-I/p: [ ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL end $ ] 
+Remaining-I/p: [ ic ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL end $ ] 
+Remaining-I/p: [ ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end $ ] 
+Remaining-I/p: [ ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL end $ ] 
+Remaining-I/p: [ ; id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL end $ ] 
+Remaining-I/p: [ id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL end $ ] 
+Remaining-I/p: [ id := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL end $ ] 
+Remaining-I/p: [ := ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL end $ ] 
+Remaining-I/p: [ ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL end $ ] 
+Remaining-I/p: [ ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL end $ ] 
+Remaining-I/p: [ ic ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL end $ ] 
+Remaining-I/p: [ ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end $ ] 
+Remaining-I/p: [ ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL end $ ] 
+Remaining-I/p: [ ; scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL end $ ] 
+Remaining-I/p: [ scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL scan]
+Applying production rule: SL -> [ scan id SL ] 
+Stack: [ scan id SL end $ ] 
+Remaining-I/p: [ scan id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [scan scan]
+Match found: scan
+Stack: [ id SL end $ ] 
+Remaining-I/p: [ id print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ SL end $ ] 
+Remaining-I/p: [ print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL print]
+Applying production rule: SL -> [ print PE SL ] 
+Stack: [ print PE SL end $ ] 
+Remaining-I/p: [ print id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [print print]
+Match found: print
+Stack: [ PE SL end $ ] 
+Remaining-I/p: [ id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [PE id]
+Applying production rule: PE -> [ T E_' ] 
+Stack: [ T E_' SL end $ ] 
+Remaining-I/p: [ id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' SL end $ ] 
+Remaining-I/p: [ id if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' SL end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' if]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' SL end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' if]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ SL end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL if]
+Applying production rule: SL -> [ if BE then SL NT_60 ] 
+Stack: [ if BE then SL NT_60 end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [if if]
+Match found: if
+Stack: [ BE then SL NT_60 end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE id]
+Applying production rule: BE -> [ NE AE_' BE_' ] 
+Stack: [ NE AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NE id]
+Applying production rule: NE -> [ RE ] 
+Stack: [ RE AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [RE id]
+Applying production rule: RE -> [ T E_' NT_58 ] 
+Stack: [ T E_' NT_58 AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' NT_58 AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' NT_58 AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' =]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' NT_58 AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' =]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ NT_58 AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_58 =]
+Applying production rule: NT_58 -> [ = E ] 
+Stack: [ = E AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ = ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [= =]
+Match found: =
+Stack: [ E AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ ic then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' then]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' then]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ AE_' BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [AE_' then]
+Applying production rule: AE_' -> [ ε ] 
+Stack: [ BE_' then SL NT_60 end $ ] 
+Remaining-I/p: [ then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE_' then]
+Applying production rule: BE_' -> [ ε ] 
+Stack: [ then SL NT_60 end $ ] 
+Remaining-I/p: [ then id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [then then]
+Match found: then
+Stack: [ SL NT_60 end $ ] 
+Remaining-I/p: [ id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL NT_60 end $ ] 
+Remaining-I/p: [ id := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL NT_60 end $ ] 
+Remaining-I/p: [ := ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL NT_60 end $ ] 
+Remaining-I/p: [ ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL NT_60 end $ ] 
+Remaining-I/p: [ ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL NT_60 end $ ] 
+Remaining-I/p: [ ic ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL NT_60 end $ ] 
+Remaining-I/p: [ ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL NT_60 end $ ] 
+Remaining-I/p: [ ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL NT_60 end $ ] 
+Remaining-I/p: [ ; else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL NT_60 end $ ] 
+Remaining-I/p: [ else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL else]
+Applying production rule: SL -> [ ε ] 
+Stack: [ NT_60 end $ ] 
+Remaining-I/p: [ else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_60 else]
+Applying production rule: NT_60 -> [ else SL end SL ] 
+Stack: [ else SL end SL end $ ] 
+Remaining-I/p: [ else if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [else else]
+Match found: else
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL if]
+Applying production rule: SL -> [ if BE then SL NT_60 ] 
+Stack: [ if BE then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ if id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [if if]
+Match found: if
+Stack: [ BE then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE id]
+Applying production rule: BE -> [ NE AE_' BE_' ] 
+Stack: [ NE AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NE id]
+Applying production rule: NE -> [ RE ] 
+Stack: [ RE AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [RE id]
+Applying production rule: RE -> [ T E_' NT_58 ] 
+Stack: [ T E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' <]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' <]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_58 <]
+Applying production rule: NT_58 -> [ < E ] 
+Stack: [ < E AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ < ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [< <]
+Match found: <
+Stack: [ E AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' then]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' then]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [AE_' then]
+Applying production rule: AE_' -> [ ε ] 
+Stack: [ BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE_' then]
+Applying production rule: BE_' -> [ ε ] 
+Stack: [ then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [then then]
+Match found: then
+Stack: [ SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ := fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E fc]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T fc]
+Applying production rule: T -> [ fc T_' ] 
+Stack: [ fc T_' E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ fc ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [fc fc]
+Match found: fc
+Stack: [ T_' E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL NT_60 end SL end $ ] 
+Remaining-I/p: [ end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ NT_60 end SL end $ ] 
+Remaining-I/p: [ end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_60 end]
+Applying production rule: NT_60 -> [ end SL ] 
+Stack: [ end SL end SL end $ ] 
+Remaining-I/p: [ end while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL while]
+Applying production rule: SL -> [ WS SL ] 
+Stack: [ WS SL end SL end $ ] 
+Remaining-I/p: [ while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [WS while]
+Applying production rule: WS -> [ while BE do SL end ] 
+Stack: [ while BE do SL end SL end SL end $ ] 
+Remaining-I/p: [ while id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [while while]
+Match found: while
+Stack: [ BE do SL end SL end SL end $ ] 
+Remaining-I/p: [ id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE id]
+Applying production rule: BE -> [ NE AE_' BE_' ] 
+Stack: [ NE AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NE id]
+Applying production rule: NE -> [ RE ] 
+Stack: [ RE AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [RE id]
+Applying production rule: RE -> [ T E_' NT_58 ] 
+Stack: [ T E_' NT_58 AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' NT_58 AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ id > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' NT_58 AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' >]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' NT_58 AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' >]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ NT_58 AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_58 >]
+Applying production rule: NT_58 -> [ > E ] 
+Stack: [ > E AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ > fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [> >]
+Match found: >
+Stack: [ E AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E fc]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T fc]
+Applying production rule: T -> [ fc T_' ] 
+Stack: [ fc T_' E_' AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ fc do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [fc fc]
+Match found: fc
+Stack: [ T_' E_' AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' do]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' do]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ AE_' BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [AE_' do]
+Applying production rule: AE_' -> [ ε ] 
+Stack: [ BE_' do SL end SL end SL end $ ] 
+Remaining-I/p: [ do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE_' do]
+Applying production rule: BE_' -> [ ε ] 
+Stack: [ do SL end SL end SL end $ ] 
+Remaining-I/p: [ do id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [do do]
+Match found: do
+Stack: [ SL end SL end SL end $ ] 
+Remaining-I/p: [ id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL end SL end SL end $ ] 
+Remaining-I/p: [ id := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL end SL end SL end $ ] 
+Remaining-I/p: [ := id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL end SL end SL end $ ] 
+Remaining-I/p: [ id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E id]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ id - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' -]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' -]
+Applying production rule: E_' -> [ - T E_' ] 
+Stack: [ - T E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ - ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [- -]
+Match found: -
+Stack: [ T E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ ic ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end SL end SL end $ ] 
+Remaining-I/p: [ ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL end SL end SL end $ ] 
+Remaining-I/p: [ ; end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL end SL end SL end $ ] 
+Remaining-I/p: [ end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ end SL end SL end $ ] 
+Remaining-I/p: [ end end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ end SL end $ ] 
+Remaining-I/p: [ end while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ SL end $ ] 
+Remaining-I/p: [ while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL while]
+Applying production rule: SL -> [ WS SL ] 
+Stack: [ WS SL end $ ] 
+Remaining-I/p: [ while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [WS while]
+Applying production rule: WS -> [ while BE do SL end ] 
+Stack: [ while BE do SL end SL end $ ] 
+Remaining-I/p: [ while id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [while while]
+Match found: while
+Stack: [ BE do SL end SL end $ ] 
+Remaining-I/p: [ id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE id]
+Applying production rule: BE -> [ NE AE_' BE_' ] 
+Stack: [ NE AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NE id]
+Applying production rule: NE -> [ RE ] 
+Stack: [ RE AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [RE id]
+Applying production rule: RE -> [ T E_' NT_58 ] 
+Stack: [ T E_' NT_58 AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' NT_58 AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ id > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' NT_58 AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' >]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' NT_58 AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' >]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ NT_58 AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_58 >]
+Applying production rule: NT_58 -> [ > E ] 
+Stack: [ > E AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ > ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [> >]
+Match found: >
+Stack: [ E AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ ic do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' do]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' do]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ AE_' BE_' do SL end SL end $ ] 
+Remaining-I/p: [ do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [AE_' do]
+Applying production rule: AE_' -> [ ε ] 
+Stack: [ BE_' do SL end SL end $ ] 
+Remaining-I/p: [ do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE_' do]
+Applying production rule: BE_' -> [ ε ] 
+Stack: [ do SL end SL end $ ] 
+Remaining-I/p: [ do id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [do do]
+Match found: do
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL end SL end $ ] 
+Remaining-I/p: [ id := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL end SL end $ ] 
+Remaining-I/p: [ := id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL end SL end $ ] 
+Remaining-I/p: [ id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E id]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL end SL end $ ] 
+Remaining-I/p: [ id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ id + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' +]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end SL end $ ] 
+Remaining-I/p: [ + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' +]
+Applying production rule: E_' -> [ + T E_' ] 
+Stack: [ + T E_' ; SL end SL end $ ] 
+Remaining-I/p: [ + ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [+ +]
+Match found: +
+Stack: [ T E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ic ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL end SL end $ ] 
+Remaining-I/p: [ ; id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL end SL end $ ] 
+Remaining-I/p: [ id := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL end SL end $ ] 
+Remaining-I/p: [ := fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL end SL end $ ] 
+Remaining-I/p: [ fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E fc]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL end SL end $ ] 
+Remaining-I/p: [ fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T fc]
+Applying production rule: T -> [ fc T_' ] 
+Stack: [ fc T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ fc ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [fc fc]
+Match found: fc
+Stack: [ T_' E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL end SL end $ ] 
+Remaining-I/p: [ ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL end SL end $ ] 
+Remaining-I/p: [ ; if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [SL if]
+Applying production rule: SL -> [ if BE then SL NT_60 ] 
+Stack: [ if BE then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ if id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [if if]
+Match found: if
+Stack: [ BE then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [BE id]
+Applying production rule: BE -> [ NE AE_' BE_' ] 
+Stack: [ NE AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NE id]
+Applying production rule: NE -> [ RE ] 
+Stack: [ RE AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [RE id]
+Applying production rule: RE -> [ T E_' NT_58 ] 
+Stack: [ T E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T id]
+Applying production rule: T -> [ id T_' ] 
+Stack: [ id T_' E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id = ic then id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ T_' E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ = ic then id := ic ; end end end $ ] 
+===
+Lookup: [T_' =]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ = ic then id := ic ; end end end $ ] 
+===
+Lookup: [E_' =]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ NT_58 AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ = ic then id := ic ; end end end $ ] 
+===
+Lookup: [NT_58 =]
+Applying production rule: NT_58 -> [ = E ] 
+Stack: [ = E AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ = ic then id := ic ; end end end $ ] 
+===
+Lookup: [= =]
+Match found: =
+Stack: [ E AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic then id := ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := ic ; end end end $ ] 
+===
+Lookup: [T_' then]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := ic ; end end end $ ] 
+===
+Lookup: [E_' then]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ AE_' BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := ic ; end end end $ ] 
+===
+Lookup: [AE_' then]
+Applying production rule: AE_' -> [ ε ] 
+Stack: [ BE_' then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := ic ; end end end $ ] 
+===
+Lookup: [BE_' then]
+Applying production rule: BE_' -> [ ε ] 
+Stack: [ then SL NT_60 end SL end $ ] 
+Remaining-I/p: [ then id := ic ; end end end $ ] 
+===
+Lookup: [then then]
+Match found: then
+Stack: [ SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id := ic ; end end end $ ] 
+===
+Lookup: [SL id]
+Applying production rule: SL -> [ id := E ; SL ] 
+Stack: [ id := E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ id := ic ; end end end $ ] 
+===
+Lookup: [id id]
+Match found: id
+Stack: [ := E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ := ic ; end end end $ ] 
+===
+Lookup: [:= :=]
+Match found: :=
+Stack: [ E ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic ; end end end $ ] 
+===
+Lookup: [E ic]
+Applying production rule: E -> [ T E_' ] 
+Stack: [ T E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic ; end end end $ ] 
+===
+Lookup: [T ic]
+Applying production rule: T -> [ ic T_' ] 
+Stack: [ ic T_' E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ic ; end end end $ ] 
+===
+Lookup: [ic ic]
+Match found: ic
+Stack: [ T_' E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end end end $ ] 
+===
+Lookup: [T_' ;]
+Applying production rule: T_' -> [ ε ] 
+Stack: [ E_' ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end end end $ ] 
+===
+Lookup: [E_' ;]
+Applying production rule: E_' -> [ ε ] 
+Stack: [ ; SL NT_60 end SL end $ ] 
+Remaining-I/p: [ ; end end end $ ] 
+===
+Lookup: [; ;]
+Match found: ;
+Stack: [ SL NT_60 end SL end $ ] 
+Remaining-I/p: [ end end end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ NT_60 end SL end $ ] 
+Remaining-I/p: [ end end end $ ] 
+===
+Lookup: [NT_60 end]
+Applying production rule: NT_60 -> [ end SL ] 
+Stack: [ end SL end SL end $ ] 
+Remaining-I/p: [ end end end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ SL end SL end $ ] 
+Remaining-I/p: [ end end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ end SL end $ ] 
+Remaining-I/p: [ end end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ SL end $ ] 
+Remaining-I/p: [ end $ ] 
+===
+Lookup: [SL end]
+Applying production rule: SL -> [ ε ] 
+Stack: [ end $ ] 
+Remaining-I/p: [ end $ ] 
+===
+Lookup: [end end]
+Match found: end
+Stack: [ $ ] 
+Remaining-I/p: [ $ ] 
+===
+Lookup: [$ $]
+Match found: $
+Stack: [ ] 
+Remaining-I/p: [ ] 
+Verdict: Accepted

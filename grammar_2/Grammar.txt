@@ -1,7 +1,7 @@
 19
 AE BE D DL E F ES IOS IS NE P PE RE S SL T TY VL WS
 32
-+ − ∗ / =
++ - ∗ / =
 < > ( ) {
 } := ;  and else 
 end ic id if int 
@@ -25,7 +25,7 @@ BE -> [ BE or AE | AE ]
 AE -> [ AE and NE | NE ]
 NE -> [ not NE | { BE } | RE ]
 RE -> [ E = E | E < E | E > E ]
-E -> [ E + T | E − T | T ]
+E -> [ E + T | E - T | T ]
 T -> [ T ∗ F | T / F | F ]
 F -> [ ( E ) | id | ic | fc ]
 P

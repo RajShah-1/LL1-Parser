@@ -231,8 +231,8 @@ void LL1::computeFollow() {
           auto firstSetOfRhsSym = this->firstSetsMap[rhsSym];
           isEps = false;
           for (Symbol* firstOfRhs : firstSetOfRhsSym) {
-            isEps = (firstOfRhs == this->epsSymbol);
-            if (!isEps) {
+            isEps = isEps || (firstOfRhs == this->epsSymbol);
+            if (!(firstOfRhs == this->epsSymbol)) {
               for (Symbol* activeSym : activeSyms)
                 this->followSetsMap[activeSym].insert(firstOfRhs);
             }
@@ -248,7 +248,9 @@ void LL1::computeFollow() {
       // active-syms depend on lhsSym"
       // (i.e., dependents[lhsSym] = active-syms)
       if (activeSyms.size() > 0) {
-        dependents[pr->lhs] = activeSyms;
+        for (Symbol* activeSym : activeSyms) {
+          dependents[pr->lhs].insert(activeSym);
+        }
       }
     }
   }
@@ -383,10 +385,21 @@ void LL1::leftFactor() {
           while (pr->rhs.size() < commonSyms.size()) {
             commonSyms.pop_back();
           }
-          while (commonSyms.size() > 0 && (pr->rhs[commonSyms.size() - 1] !=
-                                           commonSyms[commonSyms.size() - 1])) {
+          // Check from commonSyms.size()-1 to 0
+          int lastMismatch = commonSyms.size();
+          for (int ind = commonSyms.size() - 1; ind >= 0; --ind) {
+            if (pr->rhs[ind] != commonSyms[ind]) {
+              lastMismatch = ind;
+            }
+          }
+          while (commonSyms.size() > lastMismatch) {
             commonSyms.pop_back();
           }
+          // while (commonSyms.size() > 0 && (pr->rhs[commonSyms.size() - 1] !=
+          //                                  commonSyms[commonSyms.size() -
+          //                                  1])) {
+          //   commonSyms.pop_back();
+          // }
         }
 
         // insert new symbol, which will derive all the rules with common prefix
