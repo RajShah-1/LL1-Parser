@@ -16,10 +16,12 @@ LL1Parser::LL1Parser(const string& path) {
 
   // read parsing table from the file
 
-  // ifstream inFileParseTable;
-  // inFileParseTable.open(this->dirPath + "/" + PARSE_TABLE_FILE_NAME);
-  // this->readParseTableFile(inFileParseTable);
-  // inFileParseTable.close();
+  ifstream inFileParseTable;
+  inFileParseTable.open(this->dirPath + "/" + PARSE_TABLE_FILE_NAME);
+  this->readParseTableFile(inFileParseTable);
+  inFileParseTable.close();
+
+  this->printParseTable();
 }
 
 bool LL1Parser::predictiveParsing(const vector<string>& tokens) const {
@@ -81,6 +83,55 @@ bool LL1Parser::predictiveParsing(const vector<string>& tokens) const {
   return false;
 }
 
+void LL1Parser::readParseTableFile(istream& in) {
+  string iStr;
+  in >> iStr;
+  assert(iStr == "===Parse-table-begin:");
+
+  int numEntries;
+  in >> numEntries;
+  string nonTer, inpSym;
+  for (int i = 0; i < numEntries; ++i) {
+    in >> iStr;
+    assert(iStr == "Parse[");
+    in >> nonTer >> inpSym;
+    assert(this->symToPtr.find(nonTer) != this->symToPtr.end());
+    assert(this->symToPtr.find(inpSym) != this->symToPtr.end());
+    in >> iStr;
+    assert(iStr == "]");
+    in >> iStr;
+    assert(iStr == ":");
+
+    // read production rule
+    string tmpStr, lhsStr, sym;
+    // parsing the production rules
+
+    in >> sym;
+    assert(this->symToPtr.find(sym) != this->symToPtr.end());
+    assert(!this->symToPtr[sym]->isTerminal);
+    Symbol* lhs = this->symToPtr[sym];
+    lhsStr = sym;
+
+    in >> tmpStr;
+    assert(tmpStr == "->");
+
+    in >> tmpStr;
+    assert(tmpStr == "[");
+    in >> sym;
+    vector<Symbol*> rhs;
+    while (sym != "]") {
+      assert(this->symToPtr.find(sym) != this->symToPtr.end());
+      rhs.push_back(this->symToPtr[sym]);
+      in >> sym;
+    }
+    this->parsingTable[symToPtr[nonTer]][symToPtr[inpSym]] =
+        new ProductionRule(lhs, rhs);
+  }
+
+  in >> iStr;
+  assert(iStr == "===Parse-table-end");
+}
+
 void LL1Parser::readLL1File(istream& in) {
   this->symToPtr.clear();
   unordered_map<string, int> symToId;
@@ -98,7 +149,7 @@ void LL1Parser::readLL1File(istream& in) {
 
   for (int i = 0; i < numTers; ++i) {
     in >> sym;
-    this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, false);
+    this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, true);
     symToId[sym] = this->totNumSyms;
     this->nonTerminals.push_back(this->symToPtr[sym]);
     ++this->totNumSyms;
@@ -123,7 +174,7 @@ void LL1Parser::readLL1File(istream& in) {
 
   in >> sym;
   assert(this->symToPtr.find(sym) == this->symToPtr.end());
-  this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, false);
+  this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, true);
   this->epsSymbol = this->symToPtr[sym];
   symToId[sym] = this->totNumSyms;
   ++this->totNumSyms;
@@ -133,7 +184,7 @@ void LL1Parser::readLL1File(istream& in) {
 
   in >> sym;
   assert(this->symToPtr.find(sym) == this->symToPtr.end());
-  this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, false);
+  this->symToPtr[sym] = new Symbol(this->totNumSyms, sym, true);
   this->dollarSymbol = this->symToPtr[sym];
   symToId[sym] = this->totNumSyms;
   ++this->totNumSyms;
@@ -148,45 +199,10 @@ void LL1Parser::readLL1File(istream& in) {
 
   in >> iStr;
   assert(iStr == "===Production-rules-begin:");
-
-  int numProdRules;
-  in >> numProdRules;
-  for (int i = 0; i < numProdRules; ++i) {
-    string tmpStr, lhsStr;
-    // parsing the production rules
-
-    in >> sym;
-    assert(this->symToPtr.find(sym) != this->symToPtr.end());
-    assert(!this->symToPtr[sym]->isTerminal);
-    Symbol* lhs = this->symToPtr[sym];
-    lhsStr = sym;
-
-    in >> tmpStr;
-    assert(tmpStr == "->");
-
-    in >> tmpStr;
-    assert(tmpStr == "[");
-    in >> sym;
-    vector<Symbol*> rhs;
-    while (sym != "]") {
-      assert(this->symToPtr.find(sym) != this->symToPtr.end());
-      rhs.push_back(this->symToPtr[sym]);
-      in >> sym;
-    }
-
-    this->productionRules[this->symToPtr[lhsStr]].insert(
-        new ProductionRule(lhs, rhs));
-  }
-
-  in >> iStr;
-  assert(iStr == "===Production-rules-end");
-
-  in >> iStr;
-  assert(iStr == "===LL1-grammar-end");
+  // ignore production rules and return
 }
 
 void LL1Parser::printCFG() const {
-  cout << "=== CFG\n";
   cout << "Terminals: ";
   for (Symbol* terminal : this->terminals) {
     cout << terminal->symbol << " ";
@@ -200,14 +216,18 @@ void LL1Parser::printCFG() const {
   cout << "\n";
 
   cout << "Start symbol: " << this->startSymbol->symbol << "\n";
+}
 
-  cout << "\nProduction rules:\n";
-  for (auto pr : this->productionRules) {
-    for (ProductionRule* productionRule : pr.second) {
-      cout << productionRule << "\n";
+void LL1Parser::printParseTable() const {
+  cout << "===Parse-table-begin:\n";
+  for (auto nonTerRow : this->parsingTable) {
+    for (auto ipSymCell : nonTerRow.second) {
+      cout << "Parse[ " << nonTerRow.first->symbol << " "
+           << ipSymCell.first->symbol << " ] : ";
+      cout << ipSymCell.second << "\n";
     }
   }
-  cout << "===\n";
+  cout << "===Parse-table-end\n";
 }
 
 void LL1Parser::setDirPath(const string& dirPath) { this->dirPath = dirPath; }

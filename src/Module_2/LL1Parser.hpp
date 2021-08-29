@@ -25,8 +25,6 @@ class LL1Parser {
 
   // map symbol-strings to corresponding symbol-pointer
   unordered_map<string, Symbol*> symToPtr;
-  // map (symbol-ptr) to (production rules with that symbol on lhs)
-  unordered_map<Symbol*, unordered_set<ProductionRule*>> productionRules;
 
   // Parsing table:
   //
@@ -48,10 +46,11 @@ class LL1Parser {
  public:
   LL1Parser(const string& path);
   bool predictiveParsing(const vector<string>& tokens) const;
-  void printCFG() const;
   void setDirPath(const string& dirPath);
   void readLL1File(istream& in);
   void readParseTableFile(istream& in);
+  void printCFG() const;
+  void printParseTable() const;
 };
 
 // Operator-overloadings for easy printing
